@@ -6,15 +6,30 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="01" author="mrLanu">
-        <createTable tableName="test"
-                     remarks="A table for test">
-            <column name="test_id" type="int">
+    <changeSet id="create_loads" author="khabenyuk.s">
+        <createTable tableName="loads" remarks="A table loads">
+            <column name="load_id" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(100)">
+            <column name="date" type="datetime">
                 <constraints nullable="false"/>
             </column>
+            <column name="broker_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="employee_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="commodity" type="varchar(100)"/>
+            <column name="kind" type="varchar(100)"/>
+            <column name="pallets" type="int"/>
+            <column name="weight" type="int"/>
         </createTable>
+    </changeSet>
+    <changeSet id="tag-1.0" author="khabenyuk.s">
+        <tagDatabase tag="1.0" />
     </changeSet>
 </databaseChangeLog>
