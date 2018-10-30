@@ -6,14 +6,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="create_loads" author="khabenyuk.s">
-        <createTable tableName="loads" remarks="A table loads">
-            <column name="load_id" type="int">
+    <changeSet id="create_freights" author="khabenyuk.s">
+        <createTable tableName="freights" remarks="A table freights">
+            <column name="freight_id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="date" type="datetime">
-                <constraints nullable="false"/>
-            </column>
+            <column name="date" type="datetime"/>
             <column name="broker_id" type="int">
                 <constraints nullable="false"/>
             </column>
