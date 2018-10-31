@@ -21,4 +21,9 @@ public class FreightServiceImpl implements FreightService {
     public List<Freight> findAll() {
         return freightRepository.findAll();
     }
+
+    @Override
+    public Freight getOne(Integer id) {
+        return freightRepository.getOne(id);
+    }
 }

@@ -1,16 +1,16 @@
 package com.lanu.api_trucking_manager.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "freights")
-public class Freight {
+public class Freight extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer freightId;
     private String name;
+
 
     public Freight() {
     }
@@ -34,4 +34,5 @@ public class Freight {
     public void setName(String name) {
         this.name = name;
     }
+
 }

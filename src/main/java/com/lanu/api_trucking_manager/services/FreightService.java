@@ -7,4 +7,5 @@ import java.util.List;
 public interface FreightService {
     Freight save(Freight freight);
     List<Freight> findAll();
+    Freight getOne(Integer id);
 }
