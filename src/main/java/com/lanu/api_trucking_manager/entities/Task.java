@@ -7,11 +7,11 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "my_taskis")
-public class MyTaski extends AuditModel{
+@Table(name = "tasks")
+public class Task extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer myTaskiId;
+    private Integer taskId;
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -20,19 +20,19 @@ public class MyTaski extends AuditModel{
     @JsonIgnore
     private Freight freight;
 
-    public MyTaski() {
+    public Task() {
     }
 
-    public MyTaski(String name) {
+    public Task(String name) {
         this.name = name;
     }
 
-    public Integer getMyTaskiId() {
-        return myTaskiId;
+    public Integer getTaskId() {
+        return taskId;
     }
 
-    public void setMyTaskiId(Integer myTaskiId) {
-        this.myTaskiId = myTaskiId;
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     public String getName() {
