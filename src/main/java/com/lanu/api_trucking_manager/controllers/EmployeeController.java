@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
     @Autowired
@@ -33,7 +34,7 @@ public class EmployeeController {
        return employeeService.findById(employeeId).map(empl -> {
            empl.setEmail(employee.getEmail());
            empl.setFirstName(employee.getFirstName());
-           empl.setLastName(employee.getLastName());
+           empl.setSecondName(employee.getSecondName());
            empl.setOccupation(employee.getOccupation());
            empl.setSalary(employee.getSalary());
            empl.setSalaryMeasure(employee.getSalaryMeasure());
