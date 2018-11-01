@@ -2,7 +2,7 @@ package com.lanu.api_trucking_manager.controllers;
 
 import com.lanu.api_trucking_manager.entities.Freight;
 import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
-import com.lanu.api_trucking_manager.repositories.FreightRepository;
+import com.lanu.api_trucking_manager.services.FreightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,31 +16,31 @@ import javax.validation.Valid;
 public class FreightController {
 
     @Autowired
-    private FreightRepository freightRepository;
+    private FreightService freightService;
 
     @GetMapping
-    public Page<Freight> getAllPosts(Pageable pageable) {
-        return freightRepository.findAll(pageable);
+    public Page<Freight> getAllFreights(Pageable pageable) {
+        return freightService.findAll(pageable);
     }
 
     @PostMapping
-    public Freight createPost(@Valid @RequestBody Freight freight) {
-        return freightRepository.save(freight);
+    public Freight createFreight(@Valid @RequestBody Freight freight) {
+        return freightService.save(freight);
     }
 
     @PutMapping("/{freightId}")
-    public Freight updatePost(@PathVariable Integer freightId, @Valid @RequestBody Freight freightRequest) {
-        return freightRepository.findById(freightId).map(freight -> {
+    public Freight updateFreight(@PathVariable Long freightId, @Valid @RequestBody Freight freightRequest) {
+        return freightService.findById(freightId).map(freight -> {
             freight.setName(freightRequest.getName());
-            return freightRepository.save(freight);
+            return freightService.save(freight);
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
 
 
     @DeleteMapping("/{freightId}")
-    public ResponseEntity<?> deletePost(@PathVariable Integer freightId) {
-        return freightRepository.findById(freightId).map(freight -> {
-            freightRepository.delete(freight);
+    public ResponseEntity<?> deleteFreight(@PathVariable Long freightId) {
+        return freightService.findById(freightId).map(freight -> {
+            freightService.delete(freight);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }

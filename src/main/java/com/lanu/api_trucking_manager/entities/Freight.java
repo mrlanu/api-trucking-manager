@@ -8,7 +8,7 @@ public class Freight extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer freightId;
+    private Long freightId;
     private String name;
 
 
@@ -19,11 +19,11 @@ public class Freight extends AuditModel{
         this.name = name;
     }
 
-    public Integer getFreightId() {
+    public Long getFreightId() {
         return freightId;
     }
 
-    public void setFreightId(Integer freightId) {
+    public void setFreightId(Long freightId) {
         this.freightId = freightId;
     }
 

@@ -22,13 +22,13 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping("/freights/{freightId}/tasks")
-    public Page<Task> getAllTasksByFreightId(@PathVariable(value = "freightId") Integer freightId,
+    public Page<Task> getAllTasksByFreightId(@PathVariable(value = "freightId") Long freightId,
                                              Pageable pageable) {
         return taskRepository.findByFreightFreightId(freightId, pageable);
     }
 
     @PostMapping("/freights/{freightId}/tasks")
-    public Task createMyTaski(@PathVariable (value = "freightId") Integer freightId,
+    public Task createMyTaski(@PathVariable (value = "freightId") Long freightId,
                               @Valid @RequestBody Task task) {
         return freightRepository.findById(freightId).map(freight -> {
             task.setFreight(freight);
@@ -37,8 +37,8 @@ public class TaskController {
     }
 
     @PutMapping("/freights/{freightId}/tasks/{taskId}")
-    public Task updateComment(@PathVariable (value = "freightId") Integer freightId,
-                              @PathVariable (value = "taskId") Integer taskId,
+    public Task updateComment(@PathVariable (value = "freightId") Long freightId,
+                              @PathVariable (value = "taskId") Long taskId,
                               @Valid @RequestBody Task taskRequest) {
         if(!freightRepository.existsById(freightId)) {
             throw new ResourceNotFoundException("FreightId " + freightId + " not found");
@@ -51,8 +51,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/freights/{freightId}/tasks/{taskId}")
-    public ResponseEntity<?> deleteComment(@PathVariable (value = "freightId") Integer freightId,
-                                           @PathVariable (value = "taskId") Integer taskId) {
+    public ResponseEntity<?> deleteComment(@PathVariable (value = "freightId") Long freightId,
+                                           @PathVariable (value = "taskId") Long taskId) {
         if(!freightRepository.existsById(freightId)) {
             throw new ResourceNotFoundException("FreightId " + freightId + " not found");
         }

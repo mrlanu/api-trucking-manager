@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Task extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer taskId;
+    private Long taskId;
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -27,11 +27,11 @@ public class Task extends AuditModel{
         this.name = name;
     }
 
-    public Integer getTaskId() {
+    public Long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Integer taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
 
