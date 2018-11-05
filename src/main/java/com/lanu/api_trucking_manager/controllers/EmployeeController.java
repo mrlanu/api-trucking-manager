@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
 
     @Autowired
@@ -42,11 +42,11 @@ public class EmployeeController {
        }).orElseThrow(() -> new ResourceNotFoundException("EmployeeId " + employeeId + " not found"));
     }
 
-    @DeleteMapping("/{freightId}")
-    public ResponseEntity<?> deleteFreight(@PathVariable Long freightId) {
-        return employeeService.findById(freightId).map(employee -> {
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId) {
+        return employeeService.findById(employeeId).map(employee -> {
             employeeService.deleteEmployee(employee);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("EmployeeId " + employeeId + " not found"));
     }
 }
