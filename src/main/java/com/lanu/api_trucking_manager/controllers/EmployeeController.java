@@ -24,6 +24,11 @@ public class EmployeeController {
        return employeeService.findAll(pageable);
     }
 
+    @GetMapping("/{employeeId}")
+    public Employee getEmployeeById(@PathVariable Long employeeId){
+        return employeeService.findByEmployeeId(employeeId);
+    }
+
     @PostMapping
     public Employee createEmployee(@Valid @RequestBody Employee employee){
         return employeeService.save(employee);

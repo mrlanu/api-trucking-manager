@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface EmployeeService {
     Employee save(Employee employee);
+    Employee findByEmployeeId(Long id);
     Page<Employee> findAll(Pageable pageable);
     Optional<Employee> findById(Long id);
     void deleteEmployee(Employee employee);
