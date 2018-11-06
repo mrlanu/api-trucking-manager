@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
