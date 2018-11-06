@@ -23,6 +23,11 @@ public class FreightController {
         return freightService.findAll(pageable);
     }
 
+    @GetMapping("/{freightId}")
+    public Freight getById(@PathVariable Long freightId){
+        return freightService.findByFreightId(freightId);
+    }
+
     @PostMapping
     public Freight createFreight(@Valid @RequestBody Freight freight) {
         return freightService.save(freight);

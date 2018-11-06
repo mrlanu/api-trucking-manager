@@ -17,6 +17,11 @@ public class FreightServiceImpl implements FreightService {
     private FreightRepository freightRepository;
 
     @Override
+    public Freight findByFreightId(Long id) {
+        return freightRepository.findByFreightId(id);
+    }
+
+    @Override
     public Freight save(Freight freight) {
         return freightRepository.save(freight);
     }

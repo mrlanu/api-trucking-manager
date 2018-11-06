@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface FreightService {
+    Freight findByFreightId(Long id);
     Freight save(Freight freight);
     Page<Freight> findAll(Pageable pageable);
     void delete(Freight freight);
