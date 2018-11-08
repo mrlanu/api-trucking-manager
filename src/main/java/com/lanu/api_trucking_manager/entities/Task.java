@@ -1,6 +1,7 @@
 package com.lanu.api_trucking_manager.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -12,9 +13,11 @@ public class Task extends AuditModel{
     private Long taskId;
     private String name;
 
-    @JsonBackReference
+    //--> for bi-directional
+    //@JsonBackReference
     @ManyToOne
     @JoinColumn(name = "freight_id")
+    @JsonIgnore
     private Freight freight;
 
     public Task() {

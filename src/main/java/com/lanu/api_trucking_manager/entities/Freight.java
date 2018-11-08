@@ -14,9 +14,10 @@ public class Freight extends AuditModel{
     private Long freightId;
     private String name;
 
-    @JsonManagedReference
+    //--> for bi-directional
+    /*@JsonManagedReference
     @OneToMany(mappedBy = "freight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Task> taskList;
+    private List<Task> taskList;*/
 
 
     public Freight() {
