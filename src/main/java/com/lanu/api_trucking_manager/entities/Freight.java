@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "freights")
-public class Freight extends AuditModel{
+public class Freight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

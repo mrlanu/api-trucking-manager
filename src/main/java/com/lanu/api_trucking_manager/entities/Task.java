@@ -7,11 +7,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tasks")
-public class Task extends AuditModel{
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     //--> for bi-directional
     //@JsonBackReference
@@ -41,6 +45,14 @@ public class Task extends AuditModel{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Freight getFreight() {
