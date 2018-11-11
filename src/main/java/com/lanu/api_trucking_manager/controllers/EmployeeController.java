@@ -39,7 +39,7 @@ public class EmployeeController {
        return employeeService.findById(employeeId).map(empl -> {
            empl.setEmail(employee.getEmail());
            empl.setFirstName(employee.getFirstName());
-           empl.setSecondName(employee.getSecondName());
+           empl.setLastName(employee.getLastName());
            empl.setOccupation(employee.getOccupation());
            empl.setSalary(employee.getSalary());
            empl.setSalaryMeasure(employee.getSalaryMeasure());

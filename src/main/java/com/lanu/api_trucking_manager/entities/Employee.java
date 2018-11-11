@@ -10,7 +10,7 @@ public class Employee {
     private Long employeeId;
 
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String email;
     private String occupation;
     private double salary;
@@ -32,12 +32,12 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/freights")
+@CrossOrigin(origins = "*")
 public class FreightController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class FreightController {
     @PutMapping("/{freightId}")
     public Freight updateFreight(@PathVariable Long freightId, @Valid @RequestBody Freight freightRequest) {
         return freightService.findById(freightId).map(freight -> {
-            freight.setName(freightRequest.getName());
+            //freight.setName(freightRequest.getName());
             return freightService.save(freight);
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
