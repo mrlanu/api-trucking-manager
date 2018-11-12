@@ -37,7 +37,15 @@ public class FreightController {
     @PutMapping("/{freightId}")
     public Freight updateFreight(@PathVariable Long freightId, @Valid @RequestBody Freight freightRequest) {
         return freightService.findById(freightId).map(freight -> {
-            //freight.setName(freightRequest.getName());
+            freight.setEmployee(freightRequest.getEmployee());
+            freight.setBroker(freightRequest.getBroker());
+            freight.setCommodity(freightRequest.getCommodity());
+            freight.setDate(freightRequest.getDate());
+            freight.setDescription(freightRequest.getDescription());
+            freight.setKind(freightRequest.getKind());
+            freight.setPallets(freightRequest.getPallets());
+            freight.setRate(freightRequest.getRate());
+            freight.setWeight(freightRequest.getWeight());
             return freightService.save(freight);
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
