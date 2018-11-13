@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
-@CrossOrigin(origins = "*")
 public class EmployeeController {
 
     @Autowired

@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/freights")
-@CrossOrigin(origins = "*")
+/*@CrossOrigin(origins = "*")*/
 public class FreightController {
 
     @Autowired
