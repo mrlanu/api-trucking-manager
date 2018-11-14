@@ -9,12 +9,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PartialServiceImpl implements PartialService {
 
     @Autowired
     private PartialRepository partialrepository;
+
+    @Override
+    public Optional<Partial> findById(Integer partialId) {
+        return partialrepository.findById(partialId);
+    }
 
     @Override
     public Page<Partial> findByFreightFreightId(Long freightId, Pageable pageable) {

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class PartialController {
     @Autowired
     private FreightRepository freightRepository;
@@ -41,19 +42,26 @@ public class PartialController {
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
 
-    /*@PutMapping("/freights/{freightId}/tasks/{taskId}")
-    public Task updateComment(@PathVariable (value = "freightId") Long freightId,
-                              @PathVariable (value = "taskId") Long taskId,
-                              @Valid @RequestBody Task taskRequest) {
+    @PutMapping("/freights/{freightId}/partials/{partialId}")
+    public Partial updatePartial(@PathVariable (value = "freightId") Long freightId,
+                              @PathVariable (value = "partialId") Integer partialId,
+                              @Valid @RequestBody Partial partialRequest) {
         if(!freightRepository.existsById(freightId)) {
             throw new ResourceNotFoundException("FreightId " + freightId + " not found");
         }
 
-        return taskRepository.findById(taskId).map(task -> {
-            task.setName(taskRequest.getName());
-            return taskRepository.save(task);
-        }).orElseThrow(() -> new ResourceNotFoundException("taskId " + taskId + "not found"));
-    }*/
+        return partialService.findById(partialId).map(partial -> {
+            partial.setAddress(partialRequest.getAddress());
+            partial.setDate(partialRequest.getDate());
+            partial.setDescription(partialRequest.getDescription());
+            partial.setKind(partialRequest.getKind());
+            partial.setLocation(partialRequest.getLocation());
+            partial.setStatus(partialRequest.getStatus());
+            partial.setTime(partialRequest.getTime());
+            partial.setTrailer(partialRequest.getTrailer());
+            return partialService.save(partial);
+        }).orElseThrow(() -> new ResourceNotFoundException("partialId " + partialId + "not found"));
+    }
 
     /*@DeleteMapping("/freights/{freightId}/tasks/{taskId}")
     public ResponseEntity<?> deleteComment(@PathVariable (value = "freightId") Long freightId,
