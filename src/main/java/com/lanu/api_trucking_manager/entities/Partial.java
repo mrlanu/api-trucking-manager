@@ -17,10 +17,13 @@ public class Partial {
     private Date date;
     private String time;
     private Integer trailer;
-    private String address;
     private String description;
     private String status;
     private String location;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "freight_id")
@@ -70,11 +73,11 @@ public class Partial {
         this.trailer = trailer;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
