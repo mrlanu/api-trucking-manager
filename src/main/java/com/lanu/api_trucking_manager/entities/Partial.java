@@ -1,12 +1,14 @@
 package com.lanu.api_trucking_manager.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "partials")
+@Data
 public class Partial {
 
     @Id
@@ -18,7 +20,14 @@ public class Partial {
     private String time;
     private Integer trailer;
     private String description;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.UNSCHEDULED;
+
+    public enum Status {
+        NEW, UNSCHEDULED, SCHEDULED, COMPLETED
+    }
+
     private String location;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -30,86 +39,4 @@ public class Partial {
     @JsonIgnore
     private Freight freight;
 
-    public Partial() {
-    }
-
-    public Integer getPartialId() {
-        return partialId;
-    }
-
-    public void setPartialId(Integer partialId) {
-        this.partialId = partialId;
-    }
-
-    public String getKind() {
-        return kind;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public Integer getTrailer() {
-        return trailer;
-    }
-
-    public void setTrailer(Integer trailer) {
-        this.trailer = trailer;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Freight getFreight() {
-        return freight;
-    }
-
-    public void setFreight(Freight freight) {
-        this.freight = freight;
-    }
 }
