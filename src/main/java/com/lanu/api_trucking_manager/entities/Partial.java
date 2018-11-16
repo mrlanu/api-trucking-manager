@@ -15,7 +15,13 @@ public class Partial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer partialId;
 
-    private String kind;
+    @Enumerated(EnumType.STRING)
+    private Kind kind;
+
+    public enum Kind {
+        PICKUP, DELIVERY
+    }
+
     private Date date;
     private String time;
     private Integer trailer;

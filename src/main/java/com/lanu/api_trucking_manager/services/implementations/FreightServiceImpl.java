@@ -17,6 +17,11 @@ public class FreightServiceImpl implements FreightService {
     private FreightRepository freightRepository;
 
     @Override
+    public boolean existById(Long id) {
+        return freightRepository.existsById(id);
+    }
+
+    @Override
     public Freight findByFreightId(Long id) {
         return freightRepository.findByFreightId(id);
     }

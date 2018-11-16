@@ -3,6 +3,7 @@ package com.lanu.api_trucking_manager.controllers;
 import com.lanu.api_trucking_manager.entities.Partial;
 import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
 import com.lanu.api_trucking_manager.repositories.FreightRepository;
+import com.lanu.api_trucking_manager.services.FreightService;
 import com.lanu.api_trucking_manager.services.PartialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class PartialController {
     @Autowired
-    private FreightRepository freightRepository;
+    private FreightService freightService;
 
     @Autowired
     private PartialService partialService;
@@ -36,7 +37,7 @@ public class PartialController {
     @PostMapping("/freights/{freightId}/partials")
     public Partial createPartial(@PathVariable (value = "freightId") Long freightId,
                               @Valid @RequestBody Partial partial) {
-        return freightRepository.findById(freightId).map(freight -> {
+        return freightService.findById(freightId).map(freight -> {
             partial.setFreight(freight);
             return partialService.save(partial);
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
@@ -46,7 +47,7 @@ public class PartialController {
     public Partial updatePartial(@PathVariable (value = "freightId") Long freightId,
                               @PathVariable (value = "partialId") Integer partialId,
                               @Valid @RequestBody Partial partialRequest) {
-        if(!freightRepository.existsById(freightId)) {
+        if(!freightService.existById(freightId)) {
             throw new ResourceNotFoundException("FreightId " + freightId + " not found");
         }
 
