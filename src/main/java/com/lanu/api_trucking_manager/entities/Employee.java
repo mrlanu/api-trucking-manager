@@ -15,7 +15,12 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String email;
-    private String occupation;
+
+    @Enumerated(EnumType.STRING)
+    private Occupation occupation;
+
+    public enum Occupation {Driver, Dispatcher, Accounter, Mechanik}
+
     private double salary;
     private String salaryMeasure;
 }
