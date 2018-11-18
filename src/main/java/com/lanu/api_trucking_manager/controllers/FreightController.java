@@ -1,8 +1,12 @@
 package com.lanu.api_trucking_manager.controllers;
 
+import com.lanu.api_trucking_manager.entities.Delivery;
 import com.lanu.api_trucking_manager.entities.Freight;
+import com.lanu.api_trucking_manager.entities.PickUp;
 import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
+import com.lanu.api_trucking_manager.repositories.DeliveryRepository;
 import com.lanu.api_trucking_manager.services.FreightService;
+import com.lanu.api_trucking_manager.services.PickUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/freights")
@@ -18,6 +23,12 @@ public class FreightController {
 
     @Autowired
     private FreightService freightService;
+
+    @Autowired
+    private PickUpService pickUpService;
+
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
     @GetMapping
     public Page<Freight> getAllFreights(Pageable pageable) {
@@ -50,12 +61,55 @@ public class FreightController {
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
 
-
     @DeleteMapping("/{freightId}")
     public ResponseEntity<?> deleteFreight(@PathVariable Long freightId) {
         return freightService.findById(freightId).map(freight -> {
             freightService.delete(freight);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
+    }
+
+    @GetMapping("/{freightId}/pickups")
+    public List<PickUp> getAllPartialsByFreightId(@PathVariable(value = "freightId") Long freightId) {
+        return pickUpService.findAllByFreightFreightId(freightId);
+    }
+
+    @PostMapping("/{freightId}/pickups")
+    public PickUp createPartial(@PathVariable (value = "freightId") Long freightId,
+                                @Valid @RequestBody PickUp pickUp) {
+        return freightService.findById(freightId).map(freight -> {
+            pickUp.setFreight(freight);
+            return pickUpService.save(pickUp);
+        }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
+    }
+
+    @PutMapping("/{freightId}/pickups/{pickUpId}")
+    public PickUp updatePartial(@PathVariable (value = "freightId") Long freightId,
+                                @PathVariable (value = "pickUpId") Integer pickUpId,
+                                @Valid @RequestBody PickUp pickUpRequest) {
+        if(!freightService.existById(freightId)) {
+            throw new ResourceNotFoundException("FreightId " + freightId + " not found");
+        }
+
+        return pickUpService.findById(pickUpId).map(pickUp -> {
+            pickUp.setAddress(pickUpRequest.getAddress());
+            pickUp.setDate(pickUpRequest.getDate());
+            pickUp.setDescription(pickUpRequest.getDescription());
+            pickUp.setKind(pickUpRequest.getKind());
+            pickUp.setLocation(pickUpRequest.getLocation());
+            pickUp.setStatus(pickUpRequest.getStatus());
+            pickUp.setTime(pickUpRequest.getTime());
+            pickUp.setTrailer(pickUpRequest.getTrailer());
+            return pickUpService.save(pickUp);
+        }).orElseThrow(() -> new ResourceNotFoundException("pickUpId " + pickUpId + "not found"));
+    }
+
+    @PostMapping("/{freightId}/deliveries")
+    public Delivery createDel(@PathVariable (value = "freightId") Long freightId,
+                              @Valid @RequestBody Delivery delivery){
+        return freightService.findById(freightId).map(freight -> {
+            delivery.setFreight(freight);
+            return deliveryRepository.save(delivery);
+        }).orElseThrow(() -> new ResourceNotFoundException("freightId " + freightId + "not found"));
     }
 }
