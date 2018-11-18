@@ -18,6 +18,11 @@ public class PickUpServiceImpl implements PickUpService {
     private PickUpRepository pickUpRepository;
 
     @Override
+    public PickUp findByPickupId(Integer id) {
+        return pickUpRepository.findByPickupId(id);
+    }
+
+    @Override
     public Optional<PickUp> findById(Integer pickUpId) {
         return pickUpRepository.findById(pickUpId);
     }

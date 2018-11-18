@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PickUpRepository extends JpaRepository<PickUp, Integer> {
+    PickUp findByPickupId(Integer id);
     Page<PickUp> findByFreightFreightId(Long freightId, Pageable pageable);
-
     List<PickUp> findAllByFreightFreightId(Long freightId);
 
 }

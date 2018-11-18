@@ -4,16 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "pickups")
 @Data
 public class PickUp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer partialId;
+    private Integer pickupId;
 
     @Enumerated(EnumType.STRING)
     private Kind kind;
@@ -44,5 +45,19 @@ public class PickUp {
     @JoinColumn(name = "freight_id")
     @JsonIgnore
     private Freight freight;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
+    @JoinTable(name = "delivery_pickup",
+            joinColumns = @JoinColumn(name = "pickup_id"),
+            inverseJoinColumns = @JoinColumn(name = "delivery_id"))
+    private List<Delivery> deliveryList;
+
+    public void addDelivery(Delivery delivery){
+        if (deliveryList == null){
+            deliveryList = new ArrayList<>();
+        }
+        deliveryList.add(delivery);
+    }
 
 }

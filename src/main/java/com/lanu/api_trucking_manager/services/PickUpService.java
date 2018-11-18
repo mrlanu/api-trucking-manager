@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PickUpService {
+    PickUp findByPickupId(Integer id);
     Page<PickUp> findByFreightFreightId(Long freightId, Pageable pageable);
     List<PickUp> findAllByFreightFreightId(Long freightId);
     PickUp save(PickUp pickUp);
