@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "partials")
+@Table(name = "pickups")
 @Data
-public class Partial {
+public class PickUp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
