@@ -1,6 +1,7 @@
 package com.lanu.api_trucking_manager.controllers.security;
 
 import com.lanu.api_trucking_manager.entities.security.User;
+import com.lanu.api_trucking_manager.exceptions.UserAlreadyExistsException;
 import com.lanu.api_trucking_manager.services.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,9 @@ public class SecurityController {
 
     @PostMapping
     public User registerUser(@Valid @RequestBody User user) {
+        if (userService.existByUsername(user.getUsername())){
+            throw new UserAlreadyExistsException("User " + user.getUsername() + " already exists");
+        }
         return userService.save(user);
     }
 }
