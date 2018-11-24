@@ -1,6 +1,6 @@
 package com.lanu.api_trucking_manager.services;
 
-import com.lanu.api_trucking_manager.entities.Freight;
+import com.lanu.api_trucking_manager.entities.freights.Freight;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

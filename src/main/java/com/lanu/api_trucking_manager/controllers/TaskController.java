@@ -2,7 +2,7 @@ package com.lanu.api_trucking_manager.controllers;
 
 import com.lanu.api_trucking_manager.entities.Task;
 import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
-import com.lanu.api_trucking_manager.repositories.FreightRepository;
+import com.lanu.api_trucking_manager.repositories.freights.FreightRepository;
 import com.lanu.api_trucking_manager.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

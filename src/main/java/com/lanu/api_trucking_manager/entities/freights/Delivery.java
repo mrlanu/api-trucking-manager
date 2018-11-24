@@ -1,4 +1,4 @@
-package com.lanu.api_trucking_manager.entities;
+package com.lanu.api_trucking_manager.entities.freights;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,8 +24,7 @@ public class Delivery {
     private Freight freight;
 
     @JsonBackReference
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH},
-            fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "delivery_pickup",
             joinColumns = @JoinColumn(name = "delivery_id"),
             inverseJoinColumns = @JoinColumn(name = "pickup_id"))

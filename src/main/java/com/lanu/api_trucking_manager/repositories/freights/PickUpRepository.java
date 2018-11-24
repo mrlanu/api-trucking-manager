@@ -1,6 +1,6 @@
-package com.lanu.api_trucking_manager.repositories;
+package com.lanu.api_trucking_manager.repositories.freights;
 
-import com.lanu.api_trucking_manager.entities.PickUp;
+import com.lanu.api_trucking_manager.entities.freights.PickUp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

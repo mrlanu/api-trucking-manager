@@ -1,8 +1,7 @@
-package com.lanu.api_trucking_manager.controllers;
+package com.lanu.api_trucking_manager.controllers.freights;
 
-import com.lanu.api_trucking_manager.entities.Delivery;
-import com.lanu.api_trucking_manager.entities.PickUp;
-import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
+import com.lanu.api_trucking_manager.entities.freights.Delivery;
+import com.lanu.api_trucking_manager.entities.freights.PickUp;
 import com.lanu.api_trucking_manager.services.PickUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +15,10 @@ public class PickUpController {
     @Autowired
     private PickUpService pickUpService;
 
+    // assigning either new or existed delivery to the particular pickUp
     @PostMapping("/{pickupId}/deliveries")
     public PickUp createDelivery(@PathVariable(value = "pickupId")Integer pickupId,
                                  @Valid @RequestBody Delivery delivery){
-        return pickUpService.findById(pickupId).map(pickUp -> {
-            pickUp.addDelivery(delivery);
-            return pickUpService.save(pickUp);
-        }).orElseThrow(() -> new ResourceNotFoundException("PickUpId " + pickupId + " not found"));
+        return pickUpService.saveDelivery(pickupId, delivery);
     }
 }

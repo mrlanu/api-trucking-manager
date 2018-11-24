@@ -1,6 +1,7 @@
-package com.lanu.api_trucking_manager.entities;
+package com.lanu.api_trucking_manager.entities.freights;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lanu.api_trucking_manager.entities.Address;
 import lombok.Data;
 
 import javax.persistence.*;

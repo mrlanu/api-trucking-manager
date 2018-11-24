@@ -1,7 +1,7 @@
 package com.lanu.api_trucking_manager.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lanu.api_trucking_manager.entities.freights.Freight;
 
 import javax.persistence.*;
 

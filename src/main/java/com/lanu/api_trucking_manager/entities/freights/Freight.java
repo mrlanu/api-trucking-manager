@@ -1,5 +1,6 @@
-package com.lanu.api_trucking_manager.entities;
+package com.lanu.api_trucking_manager.entities.freights;
 
+import com.lanu.api_trucking_manager.entities.Employee;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,9 +27,4 @@ public class Freight {
     private int pallets;
     private String kind;
     private String description;
-
-    //--> for bi-directional
-    /*@JsonManagedReference
-    @OneToMany(mappedBy = "freight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Task> taskList;*/
 }
