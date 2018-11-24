@@ -1,8 +1,10 @@
 package com.lanu.api_trucking_manager.controllers.freights;
 
+import com.lanu.api_trucking_manager.entities.freights.Delivery;
 import com.lanu.api_trucking_manager.entities.freights.Freight;
 import com.lanu.api_trucking_manager.entities.freights.PickUp;
 import com.lanu.api_trucking_manager.exceptions.ResourceNotFoundException;
+import com.lanu.api_trucking_manager.repositories.freights.DeliveryRepository;
 import com.lanu.api_trucking_manager.services.FreightService;
 import com.lanu.api_trucking_manager.services.PickUpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class FreightController {
 
     @Autowired
     private PickUpService pickUpService;
+
+    @Autowired
+    private DeliveryRepository deliveryRepository;
 
     @GetMapping
     public Page<Freight> getAllFreights(Pageable pageable) {
@@ -97,5 +102,14 @@ public class FreightController {
             pickUp.setTrailer(pickUpRequest.getTrailer());
             return pickUpService.savePickUp(pickUp);
         }).orElseThrow(() -> new ResourceNotFoundException("pickUpId " + pickUpId + "not found"));
+    }
+
+    @PostMapping("/{freightId}/deliveries")
+    public Delivery createDelivery(@PathVariable (value = "freightId") Long freightId,
+                                 @Valid @RequestBody Delivery delivery) {
+        return freightService.findById(freightId).map(freight -> {
+            delivery.setFreight(freight);
+            return deliveryRepository.save(delivery);
+        }).orElseThrow(() -> new ResourceNotFoundException("FreightId " + freightId + " not found"));
     }
 }
